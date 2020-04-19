@@ -5,7 +5,7 @@
       <div class="left">
         <img src="../assets/logo_index.png" alt="">
         <el-input style="width: 66%;margin-left: 50px;" v-model="keyword" placeholder="请输入内容"></el-input>
-        <button>搜索</button>
+        <button @click="search">搜索</button>
       </div>
       <div class="right">
         <ul>
@@ -18,7 +18,9 @@
     <div class="nav">
       <div class="center">
         <ul>
-          <li class="new">首页</li>
+          <router-link to="/">
+            <li class="new">首页</li>
+          </router-link>
           <li>排行榜</li>
           <li>分类</li>
           <li>免费小说</li>
@@ -131,6 +133,9 @@
           }
         }
       },
+      search() {
+        this.$router.push('/search/'+this.keyword)
+      }
     }
   }
 </script>
