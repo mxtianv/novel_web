@@ -4,6 +4,10 @@ const Index = () => import('../components/Index.vue')
 const Search = () => import('../components/Search.vue')
 const Book = () => import('../components/Book.vue')
 const Chapter = () => import('../components/Chapter.vue')
+const User = () => import('../components/User.vue')
+const UserIndex = () => import('../components/UserIndex.vue')
+const UserInfo = () => import('../components/UserInfo.vue')
+const BookInfo = () => import('../components/BookInfo.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,6 +21,27 @@ const routes = [
     redirect: '/'
   },
   {
+    path: '/user',
+    redirect: '/user/index'
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User,
+    children: [
+      {
+        path: '/user/index',
+        name: 'UserIndex',
+        component: UserIndex,
+      },
+      {
+        path: '/user/info',
+        name: 'UserInfo',
+        component: UserInfo,
+      }
+    ]
+  },
+  {
     path: '/search/:keyword',
     name: 'Search',
     component: Search,
@@ -26,6 +51,12 @@ const routes = [
     path: '/book/:id',
     name: 'Book',
     component: Book,
+    props: true
+  },
+  {
+    path: '/bookinfo/:id',
+    name: 'BookInfo',
+    component: BookInfo,
     props: true
   },
   {

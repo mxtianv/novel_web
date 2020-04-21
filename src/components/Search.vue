@@ -82,6 +82,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: #333;
   }
   .book .img-con .info {
     overflow: hidden;

@@ -11,26 +11,33 @@
         <div class="title">
           <span>本周主打</span>
         </div>
+        <br>
         <div class="content">
-          <div class="left">
-            <el-carousel :interval="5000" arrow="always">
-               <el-carousel-item v-for="item in 4" :key="item">
-                 <img src="../assets/plate-1-bookcover.jpg" alt="">
-               </el-carousel-item>
-             </el-carousel>
-          </div>
-          <div class="right">
-            <ul>
-              <li v-for="(i, index) in plate1Data" :key="index">
-                <router-link :to="i.link" class="tit">
-                  {{i.title}}
-                </router-link>
-                <router-link :to="i.link" class="info">
-                  {{i.info}}
-                </router-link>
-              </li>
-            </ul>
-          </div>
+          <el-row :gutter="10">
+            <el-col :xs="24" :lg="12">
+              <div class="left">
+                <el-carousel :interval="5000" arrow="always">
+                   <el-carousel-item v-for="item in 4" :key="item">
+                     <img src="../assets/plate-1-bookcover.jpg" alt="">
+                   </el-carousel-item>
+                 </el-carousel>
+              </div>
+            </el-col>
+            <el-col :xs="24" :lg="12">
+              <div class="right">
+                <ul>
+                  <li v-for="(i, index) in plate1Data" :key="index">
+                    <router-link :to="i.link" class="tit">
+                      {{i.title}}
+                    </router-link>
+                    <router-link :to="i.link" class="info">
+                      {{i.info}}
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </el-col>
+          </el-row>
         </div>
       </div>
       <br>
@@ -134,7 +141,7 @@
               </div>
               <div style="width: 50%;" class="m-right">
                 <ul>
-                  <li v-for="(i, index) in plate1Data" :key="index">
+                  <li v-for="(i, index) in plate3Data" :key="index">
                     <router-link :to="i.link" class="tit">
                       {{i.title}}
                     </router-link>
@@ -314,7 +321,39 @@
             link: "/",
             authorLink: "/"
           }
-        ]
+        ],
+        plate3Data:[
+          {
+            title: "将门嫡女:祸国毒妃不从良",
+            info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
+            link: "/"
+          },
+          {
+            title: "将门嫡女:祸国毒妃不从良",
+            info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
+            link: "/"
+          },
+          {
+            title: "将门嫡女:祸国毒妃不从良",
+            info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
+            link: "/"
+          },
+          {
+            title: "将门嫡女:祸国毒妃不从良",
+            info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
+            link: "/"
+          },
+          {
+            title: "将门嫡女:祸国毒妃不从良",
+            info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
+            link: "/"
+          },
+          {
+            title: "将门嫡女:祸国毒妃不从良",
+            info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
+            link: "/"
+          }
+        ],
       }
     },
     methods: {
@@ -327,13 +366,11 @@
   img:hover {
     cursor: pointer;
   }
-  .el-carousel__item h3 {
-      color: #475669;
-      font-size: 18px;
-      opacity: 0.75;
-      line-height: 300px;
-      margin: 0;
+  @media screen and (max-width: 500px) {
+    .center {
+      width: 95%;
     }
+  }
 
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
@@ -354,20 +391,9 @@
     padding-bottom: 10px;
     border-bottom: 3px solid red;
   }
-  .plate-1 .content {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  .plate-1 .content .left {
-    width: 50%;
-  }
   .plate-1 .content .left img {
     width: 100%;
     height: 100%;
-  }
-  .plate-1 .content .right {
-    width: 48%;
   }
   .plate-1 .content .right ul li {
     list-style: none;

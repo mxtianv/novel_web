@@ -4,22 +4,30 @@
     <div class="center">
       <div class="left">
         <img src="../assets/logo_index.png" alt="">
-        <el-input style="width: 66%;margin-left: 50px;" v-model="keyword" placeholder="请输入内容"></el-input>
+        <el-input @keyup.enter.native="search" style="width: 66%;margin-left: 50px;" v-model="keyword" placeholder="请输入小说名字"></el-input>
         <button @click="search">搜索</button>
       </div>
       <div class="right">
+        <!-- 未登录 -->
         <ul>
           <li @click="loginT"><i class="el-icon-user"></i> 登录</li>
           <li>|</li>
           <li @click="registerT">注册</li>
         </ul>
+        <!-- 已登录 -->
+        <!-- <div class="user">
+          <img src="../assets/logo.png" alt="">
+          我爱小说网
+          <img src="../assets/vip.png" alt="">
+           <el-button style="margin-left: 20px;" size="mini" type="danger">退出</el-button>
+        </div> -->
       </div>
     </div>
     <div class="nav">
       <div class="center">
         <ul>
           <router-link to="/">
-            <li class="new">首页</li>
+            <li :class="{'new': show == 1}">首页</li>
           </router-link>
           <li>排行榜</li>
           <li>分类</li>
@@ -83,6 +91,7 @@
         password: '',
         comPassword: '',
         title: '登录',
+        show: 1
       }
     },
     methods: {
@@ -136,6 +145,15 @@
       search() {
         this.$router.push('/search/'+this.keyword)
       }
+    },
+    mounted() {
+      var url = window.document.location.href;
+      if (url.split('/')[4] == "") {
+        this.show = 1;
+      }
+      else {
+        this.show = 0;
+      }
     }
   }
 </script>
@@ -160,6 +178,17 @@
     display: flex;
     align-items: center;
   }
+  .right .user img:first-child {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
+  .right .user img:nth-child(2) {
+    width: 35px;
+    height: 20px;
+    vertical-align: middle;
+  }
   .right ul li{
     display: inline-block;
     margin-left: 10px;
@@ -174,6 +203,9 @@
     height: 50px;
     background: #f60;
     margin-top: 25px;
+  }
+  .nav ul a:hover {
+    text-decoration: none !important;
   }
   .nav ul {
     display: flex;

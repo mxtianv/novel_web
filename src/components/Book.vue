@@ -4,24 +4,21 @@
     <div class="center">
       <div class="m-top">
         <div class="title">
-          我真是练气期啊
+          斗破苍穹之大世界
         </div>
-        <p>作者： 朱笔点绛唇</p>
+        <p>作者：醉百川</p>
       </div>
       <div class="main">
         <div style="padding-bottom: 10px;border-bottom: 1px solid #999;">
           <div class="nav">
             <strong style="display: inline-block;margin-right: 15px;">正文</strong>
-            <span style="color: #999;">已更新234章</span>
+            <span style="color: #999;">已更新{{chaptersCount}}章</span>
           </div>
         </div>
         <div class="con">
-          <a href="/">第一章 上来受死</a>
-          <a href="/">第一章 上来受死</a>
-          <a href="/">第一章 上来受死</a>
-          <a href="/">第一章 上来受死</a>
-          <a href="/">第一章 上来受死</a>
-          <a href="/">第一章 上来受死</a>
+          <a v-for="(i, index) in books" :key="index" href="/">
+            <span>{{i.title}}</span>
+          </a>
         </div>
       </div>
     </div>
@@ -40,15 +37,17 @@
     },
     data() {
       return {
-        books: []
+        books: [],
+        chaptersCount: 0
       }
     },
     methods: {
 
     },
     mounted() {
-      this.axios.get("/api/book/fuzzy-search?query="+this.id).then(res => {
-        this.books = res.data.books;
+      this.axios.get("api/mix-atoc/55c831f45be2c96e1bd24d4e?view=chapters").then(res => {
+        this.books = res.data.mixToc.chapters;
+        this.chaptersCount = res.data.mixToc.chapters.length;
       })
     },
   }
@@ -57,7 +56,7 @@
 <style scoped="scoped">
   .center {
     padding: 25px;
-    border: 1px solid #999;
+    border: 1px dotted #999;
     margin-top: 15px;
     margin-bottom: 15px;
   }
@@ -72,7 +71,7 @@
   .m-top p {
     color: #666;
     font-size: 15px;
-    margin-top: 5px;
+    margin-top: 8px;
   }
   .nav {
     padding-left: 10px;
@@ -89,5 +88,12 @@
     border-bottom: 1px dashed #E0E0E0;
     display: inline-block;
     width: 20%;
+  }
+  .main .con span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 </style>
