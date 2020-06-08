@@ -5,8 +5,8 @@
       <div class="mian-t">
         <div class="book">
           <div class="left">
-            <img src="../assets/plate-2-best.jpg" alt="">
-            <router-link to="/book/1">
+            <img :src="books.cover | img" alt="">
+            <router-link :to="'/book/'+this.id">
               <button class="read">点击阅读</button>
             </router-link>
             <button class="collection">立即收藏</button>
@@ -14,10 +14,10 @@
           <div class="right">
             <div class="title">
               <router-link to="">
-                <strong>农门小王妃</strong>
+                <strong>{{books.title}}</strong>
               </router-link>
             </div>
-            <p style="margin-top: 10px;margin-bottom: 10px;">作者：123</p>
+            <p style="margin-top: 10px;margin-bottom: 10px;">作者：{{books.author}}</p>
             <el-rate
               v-model="value"
               disabled
@@ -26,14 +26,10 @@
               score-template="{value}">
             </el-rate>
             <p style="margin-top: 10px;margin-bottom: 10px;font-size: 20px;">内容简介：</p>
-            <p>
-              阮明姿一睁眼，发现自己穿越成了农家贫女。
-              爹娘早逝，爷奶不慈，家徒四壁，还附带个哑巴妹妹。
-              从一无所有开始发家致富，从荆棘遍地走向花团锦簇。
-              一时赚钱一时爽，一直赚钱一直爽！
-              然而捡回来的那个男人，却不依不饶：王妃，跟孤回府。
-              阮明姿巧笑嫣然：你哪位？
+            <p style="line-height: 30px;">
+              {{books.longIntro}}
             </p>
+            <p style="color: red;margin-top: 30px;">最新章节：{{books.lastChapter}}</p>
           </div>
         </div>
         <div class="ads">
@@ -42,11 +38,11 @@
       </div>
       <div class="comment">
         <div class="title">
-          <span>《农门小王妃》最新书评</span>
+          <span>《{{books.title}}》最新书评</span>
           <el-button @click="dialogTableVisible = true" style="margin-left: 10px;" size="mini" type="primary">发表评论</el-button>
         </div>
         <ul>
-          <li v-for="(i, index) in comment" :key="index">
+          <li v-for="(i, index) in newComment" :key="index">
             <div class="img">
               <img src="../assets/logo.png" alt="">
             </div>
@@ -63,6 +59,15 @@
             </div>
           </li>
         </ul>
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          style="margin-top: 15px;"
+          background
+          :page-size="pageSize"
+          layout="prev, pager, next"
+          :total="total">
+        </el-pagination>
       </div>
     </div>
     <el-dialog title="发表评论" :visible.sync="dialogTableVisible">
@@ -82,7 +87,7 @@
   import Top from './Top.vue'
   import Bottom from './Bottom.vue'
   export default {
-    props: ['keyword'],
+    props: ['keyword', "id"],
     components: {
       Top,
       Bottom
@@ -97,29 +102,32 @@
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "阮明姿一睁眼，发现自己穿越成了农家贫女。 爹娘早逝，爷奶不慈，家徒四壁，还附带个哑巴妹妹。 从一无所有开始发家致富，从荆棘遍地走向花团锦簇。 "
+            con: "木小天博客http://muxiaotian.cn:81/"
           },
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "阮明姿一睁眼，发现自己穿越成了农家贫女。 爹娘早逝，爷奶不慈，家徒四壁，还附带个哑巴妹妹。 从一无所有开始发家致富，从荆棘遍地走向花团锦簇。 "
+            con: "木小天博客http://muxiaotian.cn:81/"
           },
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "阮明姿一睁眼，发现自己穿越成了农家贫女。 爹娘早逝，爷奶不慈，家徒四壁，还附带个哑巴妹妹。 从一无所有开始发家致富，从荆棘遍地走向花团锦簇。 "
+            con: "木小天博客http://muxiaotian.cn:81/"
           },
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "阮明姿一睁眼，发现自己穿越成了农家贫女。 爹娘早逝，爷奶不慈，家徒四壁，还附带个哑巴妹妹。 从一无所有开始发家致富，从荆棘遍地走向花团锦簇。 "
+            con: "木小天博客http://muxiaotian.cn:81/"
           },
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "阮明姿一睁眼，发现自己穿越成了农家贫女。 爹娘早逝，爷奶不慈，家徒四壁，还附带个哑巴妹妹。 从一无所有开始发家致富，从荆棘遍地走向花团锦簇。 "
+            con: "木小天博客http://muxiaotian.cn:81/"
           }
-        ]
+        ],
+        newComment: [],
+        total: "",
+        pageSize: 10
       }
     },
     methods: {
@@ -133,10 +141,33 @@
         else {
 
         }
+      },
+      handleSizeChange(val) {
+        //console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        this.newComment = [];
+        for (let i = (val - 1) * this.pageSize; i < this.pageSize * val; i++) {
+          if (this.comment[i] != undefined) {
+            this.newComment.push(this.comment[i]);
+          } else {
+            break;
+          }
+        }
       }
     },
     mounted() {
-
+      this.total = this.comment.length;
+      this.handleCurrentChange(1);
+      this.axios.get("/api/book/"+this.id).then(res => {
+        this.books = res.data;
+      })
+    },
+    filters: {
+      img(val) {
+        let imgurl = val.replace("/agent/", "");
+        return unescape(imgurl);
+      }
     }
   }
 </script>

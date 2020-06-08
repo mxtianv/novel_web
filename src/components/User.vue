@@ -48,7 +48,7 @@
     mounted() {
       let url = window.document.location.href;
       url = url.split('/');
-      console.log(url)
+      //console.log(url)
       if (url[5] == 'index') {
         this.show = 0;
       } else if (url[5] == 'info') {

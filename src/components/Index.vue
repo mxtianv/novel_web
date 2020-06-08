@@ -14,24 +14,24 @@
         <br>
         <div class="content">
           <el-row :gutter="10">
-            <el-col :xs="24" :lg="12">
+            <el-col :xs="12" :lg="12"> <!-- :xs="24" -->
               <div class="left">
                 <el-carousel :interval="5000" arrow="always">
-                   <el-carousel-item v-for="item in 4" :key="item">
-                     <img src="../assets/plate-1-bookcover.jpg" alt="">
+                   <el-carousel-item v-for="(item, index) in swiper" :key="index">
+                     <img :src="item.img" alt="">
                    </el-carousel-item>
                  </el-carousel>
               </div>
             </el-col>
-            <el-col :xs="24" :lg="12">
+            <el-col :xs="12" :lg="12"> <!-- :xs="24" -->
               <div class="right">
                 <ul>
-                  <li v-for="(i, index) in plate1Data" :key="index">
-                    <router-link :to="i.link" class="tit">
+                  <li v-for="(i, index) in mainBooks" :key="index">
+                    <router-link :to="'/bookinfo/' + i._id" class="tit">
                       {{i.title}}
                     </router-link>
-                    <router-link :to="i.link" class="info">
-                      {{i.info}}
+                    <router-link :to="'/bookinfo/' + i._id" class="info">
+                      {{i.shortIntro}}
                     </router-link>
                   </li>
                 </ul>
@@ -64,18 +64,18 @@
                 </p>
               </div>
               <div class="right">
-                <div class="book" v-for="(i, index) in plate2Book" :key="index">
+                <div class="book" v-for="(i, index) in p2Books" :key="index">
                   <div class="cover">
-                    <router-link :to="i.link">
-                      <img :src="i.img" alt="">
+                    <router-link :to="'/bookinfo/' + i._id" >
+                      <img :src="i.cover | img" alt="">
                     </router-link>
                   </div>
                   <div class="detailed">
-                    <router-link :to="i.link">{{i.title}}</router-link>
+                    <router-link :to="'/bookinfo/' + i._id" >{{i.title}}</router-link>
                     <p></p>
-                    <router-link style="color: #666;" :to="i.authorLink">{{i.author}}</router-link>
+                    <router-link style="color: #666;" :to="'/bookinfo/' + i._id" >{{i.author}}</router-link>
                     <p></p>
-                    <router-link style="color: #666;" :to="i.link">{{i.info}}</router-link>
+                    <router-link style="color: #666;" :to="'/bookinfo/' + i._id" >{{i.shortIntro}}</router-link>
                   </div>
                 </div>
               </div>
@@ -87,13 +87,13 @@
             </div>
             <br>
             <ul>
-              <li v-for="(i, index) in plate2NewBook" :key="index">
+              <li v-for="(i, index) in clickBang" :key="index">
                 <div class="tit">
-                  <router-link style="color: #999;" to="">[{{i.classification}}] </router-link>
-                  <router-link :to="i.link">{{i.title}}</router-link>
+                  <router-link style="color: #999;" to="">[{{i.minorCate}}] </router-link>
+                  <router-link :to="'/bookinfo/'+i._id">{{i.title}}</router-link>
                 </div>
                 <div class="w-name">
-                  <router-link :to="i.authorLink">{{i.author}}</router-link>
+                  <router-link :to="'/bookinfo/'+i._id">{{i.author}}</router-link>
                 </div>
               </li>
             </ul>
@@ -104,13 +104,13 @@
             </div>
             <br>
             <ul>
-              <li v-for="(i, index) in plate2NewBook" :key="index">
+              <li v-for="(i, index) in clickBang" :key="index">
                 <div class="tit">
-                  <router-link style="color: #999;" to="">[{{i.classification}}] </router-link>
-                  <router-link :to="i.link">{{i.title}}</router-link>
+                  <router-link style="color: #999;" to="">[{{i.minorCate}}] </router-link>
+                  <router-link :to="'/bookinfo/'+i._id">{{i.title}}</router-link>
                 </div>
                 <div class="w-name">
-                  <router-link :to="i.authorLink">{{i.author}}</router-link>
+                  <router-link :to="'/bookinfo/'+i._id">{{i.author}}</router-link>
                 </div>
               </li>
             </ul>
@@ -141,29 +141,29 @@
               </div>
               <div style="width: 50%;" class="m-right">
                 <ul>
-                  <li v-for="(i, index) in plate3Data" :key="index">
-                    <router-link :to="i.link" class="tit">
+                  <li v-for="(i, index) in boutiqueBooks" :key="index">
+                    <router-link :to="'/bookinfo/' + i._id" class="tit">
                       {{i.title}}
                     </router-link>
-                    <router-link :to="i.link" class="info">
-                      {{i.info}}
+                    <router-link :to="'/bookinfo/' + i._id" class="info">
+                      {{i.shortIntro}}
                     </router-link>
                   </li>
                 </ul>
               </div>
               <div style="width: 22%;" class="right">
-                <div class="book" v-for="(i, index) in plate2Book" :key="index">
+                <div class="book" v-for="(i, index) in p2Books" :key="index">
                   <div class="cover">
-                    <router-link :to="i.link">
-                      <img :src="i.img" alt="">
+                    <router-link :to="'/bookinfo/' + i._id" >
+                      <img :src="i.cover | img" alt="">
                     </router-link>
                   </div>
                   <div class="detailed">
-                    <router-link :to="i.link">{{i.title}}</router-link>
+                    <router-link :to="'/bookinfo/' + i._id" >{{i.title}}</router-link>
                     <p></p>
-                    <router-link style="color: #666;" :to="i.authorLink">{{i.author}}</router-link>
+                    <router-link style="color: #666;" :to="'/bookinfo/' + i._id" >{{i.author}}</router-link>
                     <p></p>
-                    <router-link style="color: #666;" :to="i.link">{{i.info}}</router-link>
+                    <router-link style="color: #666;" :to="'/bookinfo/' + i._id" >{{i.shortIntro}}</router-link>
                   </div>
                 </div>
               </div>
@@ -183,7 +183,7 @@
           <a href="/">小说网</a>
         </li>
         <li>
-          <a href="/">木小天博客</a>
+          <a href="http://mxtian.cn:81">木小天博客</a>
         </li>
       </ul>
     </div>
@@ -202,26 +202,31 @@
     },
     data() {
       return {
+        clickBang: [],
+        swiper: [],
+        bangBooks: [],
+        boutiqueBooks: [],
+        mainBooks: [],
         plate1Data:[
           {
             title: "将门嫡女:祸国毒妃不从良",
             info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
-            link: "/"
+            link: "/bookinfo/1"
           },
           {
             title: "将门嫡女:祸国毒妃不从良",
             info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
-            link: "/"
+            link: "/bookinfo/1"
           },
           {
             title: "将门嫡女:祸国毒妃不从良",
             info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
-            link: "/"
+            link: "/bookinfo/1"
           },
           {
             title: "将门嫡女:祸国毒妃不从良",
             info: "前生的她受世人唾弃，重生十五年之后，她决定死不悔改，该杀的，绝不放过。",
-            link: "/"
+            link: "/bookinfo/1"
           }
         ],
         plate2Book:[
@@ -354,10 +359,42 @@
             link: "/"
           }
         ],
+        p2Books: []
       }
     },
     methods: {
 
+    },
+    mounted() {
+      this.axios.get("/api/book/by-categories?gender=male&type=hot&major=奇幻&minor=&start=0&limit=3").then(res => {
+        this.p2Books = res.data.books;
+        //console.log(this.p2Books)
+      })
+      this.axios.get("/api/book/by-categories?gender=male&type=hot&major=玄幻&minor=&start=0&limit=20").then(res => {
+        for(let i = 0; i < 10; i++) {
+          this.clickBang.push(res.data.books[i]);
+        }
+        //console.log(this.p2Books)
+      })
+      this.axios.get("/api/recommendPage/node/spread/575f74f27a4a60dc78a435a3?pl=ios").then(res => {
+        this.swiper = res.data.data;
+        console.log(this.swiper)
+      })
+      this.axios.get("/api/ranking/54d43437d47d13ff21cad58b").then(res => {
+        this.bangBooks = res.data.ranking.books;
+        for (let i = 0; i < 4; i++) {
+          this.mainBooks.push(this.bangBooks[i]);
+        }
+        for (let i = 4; i < 10; i++) {
+          this.boutiqueBooks.push(this.bangBooks[i]);
+        }
+      })
+    },
+    filters: {
+      img(val) {
+        let imgurl = val.replace("/agent/", "");
+        return unescape(imgurl);
+      }
     }
   }
 </script>
@@ -365,6 +402,13 @@
 <style scoped="scoped">
   img:hover {
     cursor: pointer;
+  }
+  .book a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
   @media screen and (max-width: 500px) {
     .center {

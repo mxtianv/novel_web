@@ -5,7 +5,7 @@
       <div class="book" v-for="(i, index) in books" :key="index">
         <div class="img-con">
           <div class="img">
-            <img src="../assets/plate-2-best.jpg" alt="">
+            <img :src="i.cover | img" alt="">
           </div>
           <div class="con">
             <div class="title">标题：{{i.title}}</div>
@@ -23,7 +23,7 @@
         </div>
         <div style="margin-left: 20px;" class="more">
           <p style="margin-top: 15px;"></p>
-           <el-button type="success">在线阅读</el-button>
+           <el-button @click="goRead(i._id)" type="success">在线阅读</el-button>
            <p style="margin-top: 15px;"></p>
            <el-button type="primary">收藏本书</el-button>
         </div>
@@ -48,12 +48,20 @@
       }
     },
     methods: {
-
+      goRead(id) {
+        this.$router.push("/bookinfo/" + id);
+      }
     },
     mounted() {
       this.axios.get("/api/book/fuzzy-search?query="+this.keyword).then(res => {
         this.books = res.data.books;
       })
+    },
+    filters: {
+      img(val) {
+        let imgurl = val.replace("/agent/", "");
+        return unescape(imgurl);
+      }
     },
     watch: {
       keyword(val) {

@@ -4,9 +4,9 @@
     <div class="center">
       <div class="m-top">
         <div class="title">
-          斗破苍穹之大世界
+          {{info.title}}
         </div>
-        <p>作者：醉百川</p>
+        <p>作者：{{info.author}} </p>
       </div>
       <div class="main">
         <div style="padding-bottom: 10px;border-bottom: 1px solid #999;">
@@ -16,9 +16,9 @@
           </div>
         </div>
         <div class="con">
-          <a v-for="(i, index) in books" :key="index" href="/">
+          <router-link v-for="(i, index) in books" :key="index" to="/">
             <span>{{i.title}}</span>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -37,6 +37,7 @@
     },
     data() {
       return {
+        info: [],
         books: [],
         chaptersCount: 0
       }
@@ -45,9 +46,12 @@
 
     },
     mounted() {
-      this.axios.get("api/mix-atoc/55c831f45be2c96e1bd24d4e?view=chapters").then(res => {
+      this.axios.get("api/mix-atoc/"+this.id+"?view=chapters").then(res => {
         this.books = res.data.mixToc.chapters;
         this.chaptersCount = res.data.mixToc.chapters.length;
+      })
+      this.axios.get("/api/book/"+this.id).then(res => {
+        this.info = res.data;
       })
     },
   }

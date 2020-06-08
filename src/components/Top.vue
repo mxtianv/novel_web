@@ -9,18 +9,21 @@
       </div>
       <div class="right">
         <!-- 未登录 -->
-        <ul>
+        <ul v-if="isLogin != true">
           <li @click="loginT"><i class="el-icon-user"></i> 登录</li>
           <li>|</li>
           <li @click="registerT">注册</li>
         </ul>
         <!-- 已登录 -->
-        <!-- <div class="user">
+        <div class="user" v-if="isLogin == true">
           <img src="../assets/logo.png" alt="">
-          我爱小说网
+          {{user}}
           <img src="../assets/vip.png" alt="">
-           <el-button style="margin-left: 20px;" size="mini" type="danger">退出</el-button>
-        </div> -->
+          <router-link to="/user/index">
+            <el-button style="margin-left: 10px;" size="mini" type="primary">个人中心</el-button>
+          </router-link>
+           <el-button @click="logout" style="margin-left: 15px;" size="mini" type="danger">退出</el-button>
+        </div>
       </div>
     </div>
     <div class="nav">
@@ -84,8 +87,11 @@
   export default {
     data() {
       return {
+        request: 'http://muxiaotian.cn:96',
+        user: '',
         keyword: '',
         login: false,
+        isLogin: false,
         register: false,
         username: '',
         password: '',
@@ -128,7 +134,30 @@
           } else if (this.password == ''){
             this.$message.error('请输入密码');
           } else {
-            this.$message.error('登录失败，用户名或密码错误！');
+            let user = {
+            	"username": this.username,
+            	"password": this.password
+            }
+            let _this = this;
+            this.axios.post(this.request + '/dm/login', user).then(res => {
+            	if (res.data.msg == '0') {
+            		this.$message.error('登录失败，用户名或密码错误！');
+            	} else {
+            		window.sessionStorage.setItem('token', res.data.token)
+            		window.sessionStorage.setItem('user', res.data.user)
+            		window.sessionStorage.setItem('balance', res.data.num)
+            		this.$notify({
+            			title: '友情提示',
+            			message: '登录成功！你的账户余额为：' + res.data.num + "积分",
+            			type: 'success'
+            		});
+                _this.login = false;
+            		_this.isLogin = true;
+                _this.user = res.data.user;
+            	}
+            }, err => {
+            	this.$message.error('服务器连接失败！');
+            })
           }
         } else{
           if (this.username.length < 6 || this.username.length > 15 ) {
@@ -138,12 +167,30 @@
           } else if (this.password != this.comPassword){
             this.$message.error('两次输入密码不一致');
           }else {
-            this.$message.error('注册系统暂未开放！');
+            let user = {
+            	"username": this.username,
+            	"password": this.password
+            }
+            this.axios.post(this.request + '/dm/zc', user).then(res => {
+            	//console.log(res)
+            	if (res.data.msg == '0') {
+            		this.$message.error('注册失败，该账户已被注册！');
+            	} else {
+            		this.$message.success('注册成功！');
+            		this.tologin();
+            	}
+            }, err => {
+            	this.$message.error('服务器连接失败！');
+            })
           }
         }
       },
       search() {
         this.$router.push('/search/'+this.keyword)
+      },
+      logout() {
+        window.sessionStorage.clear();
+        this.isLogin = false;
       }
     },
     mounted() {
@@ -153,6 +200,10 @@
       }
       else {
         this.show = 0;
+      }
+      if (window.sessionStorage.getItem('user')) {
+      	this.isLogin = true;
+      	this.user = window.sessionStorage.getItem('user');
       }
     }
   }
