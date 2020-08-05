@@ -59,15 +59,17 @@
             </div>
           </li>
         </ul>
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          style="margin-top: 15px;"
-          background
-          :page-size="pageSize"
-          layout="prev, pager, next"
-          :total="total">
-        </el-pagination>
+        <div style="text-align: center;">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            style="margin-top: 15px;"
+            background
+            :page-size="pageSize"
+            layout="prev, pager, next"
+            :total="total">
+          </el-pagination>
+        </div>
       </div>
     </div>
     <el-dialog title="发表评论" :visible.sync="dialogTableVisible">
@@ -134,8 +136,9 @@
       release() {
         if (this.textarea.length == "") {
           this.$message.error("内容不能为空");
-        }
-        else if (this.textarea.length > 80) {
+        } else if (!sessionStorage.getItem("user")) {
+          this.$message.error("请先登陆！");
+        } else if (this.textarea.length > 80) {
           this.$message.error("内容不能超过80个字符");
         }
         else {

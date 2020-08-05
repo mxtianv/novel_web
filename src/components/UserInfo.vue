@@ -9,6 +9,10 @@
               123456
             </li>
             <li>
+              <span>用户余额: </span>
+              <span style="color: red;">{{balance}}积分</span>
+            </li>
+            <li>
               <span>用户昵称: </span>
               <input v-model="username" type="text">
             </li>
@@ -39,13 +43,17 @@
         return {
           activeName: 'first',
           username: "小说网",
-          radio: '1'
+          radio: '1',
+          balance: ''
         };
       },
       methods: {
         handleClick(tab, event) {
           console.log(tab, event);
         }
+      },
+      mounted() {
+        this.balance = sessionStorage.getItem("balance")
       }
     };
 </script>
@@ -66,5 +74,8 @@
     border: 1px solid #D9D9D9;
     padding: 5px;
     width: 200px;
+  }
+  .el-tab-pane {
+    min-height: 300px;
   }
 </style>

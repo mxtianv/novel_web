@@ -2,7 +2,7 @@
   <div class="user-index center">
     <ul>
       <li>
-        <router-link to="/book/1">
+        <router-link to="/book/5ec24e70f4fdb48b0ac42bd1">
           <img src="../assets/plate-2-best.jpg" alt="">
         </router-link>
         <p>为啥他们都崇拜我</p>
@@ -23,7 +23,6 @@
   }
   ul {
     display: flex;
-    justify-content: start;
   }
   ul li {
     list-style: none;

@@ -81,6 +81,9 @@
     padding-left: 10px;
     border-left: 3px solid red;
   }
+  .main {
+    min-height: 500px;
+  }
   .main .con {
     padding: 25px;
   }
