@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-const Index = () => import('../components/Index.vue')
-const Search = () => import('../components/Search.vue')
-const Book = () => import('../components/Book.vue')
-const Chapter = () => import('../components/Chapter.vue')
-const User = () => import('../components/User.vue')
-const UserIndex = () => import('../components/UserIndex.vue')
-const UserInfo = () => import('../components/UserInfo.vue')
-const BookInfo = () => import('../components/BookInfo.vue')
+const Index = () => import('../views/Index.vue')
+const Search = () => import('../views/Search.vue')
+const Book = () => import('../views/Book.vue')
+const Chapter = () => import('../views/Chapter.vue')
+const User = () => import('../views/User.vue')
+const UserIndex = () => import('../views/UserIndex.vue')
+const UserInfo = () => import('../views/UserInfo.vue')
+const BookInfo = () => import('../views/BookInfo.vue')
 Vue.use(VueRouter)
 
 const routes = [

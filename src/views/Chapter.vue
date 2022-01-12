@@ -127,8 +127,8 @@
 </template>
 
 <script>
-  import Top from './Top.vue'
-  import Bottom from './Bottom.vue'
+  import Top from '../components/Top.vue'
+  import Bottom from '../components/Bottom.vue'
   export default {
     props: ['id'],
     components: {

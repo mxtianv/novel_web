@@ -2,6 +2,8 @@
   <div class="index">
     <Top></Top>
     <br>
+    <!-- <span @click="getCaptcha" v-html="captcha"></span>
+    <button @click="verifyCaptcha">验证</button> -->
     <div class="main center">
       <div class="plate-1">
         <div class="p-top">
@@ -18,7 +20,9 @@
               <div class="left">
                 <el-carousel :interval="5000" arrow="always">
                    <el-carousel-item v-for="(item, index) in swiper" :key="index">
-                     <img :src="item.img" alt="">
+                     <router-link to="/chapter/1">
+                       <img :src="item.img" alt="">
+                     </router-link>
                    </el-carousel-item>
                  </el-carousel>
               </div>
@@ -180,10 +184,10 @@
       <br>
       <ul class="clearfix">
         <li>
-          <a href="/">小说网</a>
+          <a target="_blank" href="https://xa.mxtian.cn">寻案社区</a>
         </li>
         <li>
-          <a href="http://mxtian.cn:81">木小天博客</a>
+          <a target="_blank" href="https://mxtian.cn">木小天博客</a>
         </li>
       </ul>
     </div>
@@ -193,8 +197,8 @@
 </template>
 
 <script>
-  import Top from './Top.vue'
-  import Bottom from './Bottom.vue'
+  import Top from '../components/Top.vue'
+  import Bottom from '../components/Bottom.vue'
   export default {
     components: {
       Top,
@@ -359,13 +363,24 @@
             link: "/"
           }
         ],
-        p2Books: []
+        p2Books: [],
+        captcha: ""
       }
     },
     methods: {
-
+      verifyCaptcha() {
+        this.axios.get("/api/verifyCaptcha").then(res => {
+          console.log(res.data)
+        })
+      },
+      getCaptcha() {
+        this.axios.get("/api/captcha").then(res => {
+          this.captcha = res.data.img;
+        })
+      }
     },
     mounted() {
+			this.getCaptcha();
       this.axios.get("/api/book/by-categories?gender=male&type=hot&major=奇幻&minor=&start=0&limit=3").then(res => {
         this.p2Books = res.data.books;
         //console.log(this.p2Books)

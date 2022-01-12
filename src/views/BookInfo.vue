@@ -86,8 +86,8 @@
 </template>
 
 <script>
-  import Top from './Top.vue'
-  import Bottom from './Bottom.vue'
+  import Top from '../components/Top.vue'
+  import Bottom from '../components/Bottom.vue'
   export default {
     props: ['keyword', "id"],
     components: {
@@ -104,27 +104,27 @@
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "木小天博客http://muxiaotian.cn:81/"
+            con: "木小天博客https://mxtian.cn/"
           },
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "木小天博客http://muxiaotian.cn:81/"
+            con: "木小天博客https://mxtian.cn/"
           },
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "木小天博客http://muxiaotian.cn:81/"
+            con: "木小天博客https://mxtian.cn/"
           },
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "木小天博客http://muxiaotian.cn:81/"
+            con: "木小天博客https://mxtian.cn/"
           },
           {
             name: "木小天",
             time: "2020-04-21 11:00:07 发表于 iPhone APP ",
-            con: "木小天博客http://muxiaotian.cn:81/"
+            con: "木小天博客https://mxtian.cn/"
           }
         ],
         newComment: [],

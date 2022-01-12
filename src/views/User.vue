@@ -5,7 +5,7 @@
       <div class="user-t">
         <img src="../assets/logo.png" alt="">
         <p>
-          我爱小说网
+          木小天
           <img src="../assets/vip.png" alt="">
         </p>
       </div>
@@ -27,8 +27,8 @@
 </template>
 
 <script>
-  import Top from './Top.vue'
-  import Bottom from './Bottom.vue'
+  import Top from '../components/Top.vue'
+  import Bottom from '../components/Bottom.vue'
   export default {
     components: {
       Top,

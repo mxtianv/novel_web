@@ -36,6 +36,9 @@
           <li>分类</li>
           <li>免费小说</li>
           <li>完本小说</li>
+          <router-link to="/chapter/1">
+            <li>斗破苍穹</li>
+          </router-link>
         </ul>
       </div>
     </div>
@@ -87,7 +90,7 @@
   export default {
     data() {
       return {
-        request: 'http://muxiaotian.cn:96',
+        request: 'http://mxtian.cn:90',
         user: '',
         keyword: '',
         login: false,
@@ -134,12 +137,22 @@
           } else if (this.password == ''){
             this.$message.error('请输入密码');
           } else {
+
+            window.sessionStorage.setItem('token', "mxtiancntoken")
+            window.sessionStorage.setItem('user', "木小天")
+            window.sessionStorage.setItem('balance', 30)
+            this.login = false;
+            this.isLogin = true;
+            this.user = "木小天";
+            this.$message.success("登陆成功");
+            return;
+
             let user = {
             	"username": this.username,
             	"password": this.password
             }
             let _this = this;
-            this.axios.post(this.request + '/dm/login', user).then(res => {
+            this.axios.post(this.request + '/api/login', user).then(res => {
             	if (res.data.msg == '0') {
             		this.$message.error('登录失败，用户名或密码错误！');
             	} else {
@@ -171,7 +184,7 @@
             	"username": this.username,
             	"password": this.password
             }
-            this.axios.post(this.request + '/dm/zc', user).then(res => {
+            this.axios.post(this.request + '/api/register', user).then(res => {
             	//console.log(res)
             	if (res.data.msg == '0') {
             		this.$message.error('注册失败，该账户已被注册！');
@@ -217,6 +230,9 @@
   .left {
     display: flex;
     align-items: center;
+  }
+  .left img {
+    width: 200px;
   }
   .left button {
     height: 40px;
