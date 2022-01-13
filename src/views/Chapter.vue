@@ -148,11 +148,12 @@
   .title {
     font-size: 25px;
     text-align: center;
-    margin-top: 15px;
+    padding-top: 15px;
     margin-bottom: 15px;
   }
   .chapter {
     background: #f8f3e9;
+    padding-bottom: 30px;
   }
   .main .info {
     text-align: center;
