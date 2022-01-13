@@ -1,6 +1,5 @@
 <template>
   <div class="book">
-    <Top></Top>
     <div class="center">
       <div class="m-top">
         <div class="title">
@@ -22,19 +21,12 @@
         </div>
       </div>
     </div>
-    <Bottom></Bottom>
   </div>
 </template>
 
 <script>
-  import Top from '../components/Top.vue'
-  import Bottom from '../components/Bottom.vue'
   export default {
     props: ['id'],
-    components: {
-      Top,
-      Bottom
-    },
     data() {
       return {
         info: [],

@@ -1,12 +1,17 @@
 <template>
   <div id="app">
+    <Top></Top>
     <router-view/>
+    <Bottom></Bottom>
   </div>
 </template>
 <script>
+  import Top from './components/Top.vue'
+  import Bottom from './components/Bottom.vue'
   export default {
-    mounted() {
-      window.document.title = "看看小说";
+    components: {
+      Top,
+      Bottom
     }
   }
 </script>

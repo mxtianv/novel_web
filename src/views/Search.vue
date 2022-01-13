@@ -1,6 +1,5 @@
 <template>
   <div class="search">
-    <Top></Top>
     <div class="main center">
       <div class="book" v-for="(i, index) in books" :key="index">
         <div class="img-con">
@@ -29,19 +28,12 @@
         </div>
       </div>
     </div>
-    <Bottom></Bottom>
   </div>
 </template>
 
 <script>
-  import Top from '../components/Top.vue'
-  import Bottom from '../components/Bottom.vue'
   export default {
     props: ['keyword'],
-    components: {
-      Top,
-      Bottom
-    },
     data() {
       return {
         books: []

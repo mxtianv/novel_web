@@ -1,6 +1,5 @@
 <template>
   <div class="index">
-    <Top></Top>
     <br>
     <!-- <span @click="getCaptcha" v-html="captcha"></span>
     <button @click="verifyCaptcha">验证</button> -->
@@ -192,18 +191,11 @@
       </ul>
     </div>
     <br>
-    <Bottom></Bottom>
   </div>
 </template>
 
 <script>
-  import Top from '../components/Top.vue'
-  import Bottom from '../components/Bottom.vue'
   export default {
-    components: {
-      Top,
-      Bottom
-    },
     data() {
       return {
         clickBang: [],

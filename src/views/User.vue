@@ -1,6 +1,5 @@
 <template>
   <div class="user">
-    <Top></Top>
     <div class="user-nav center">
       <div class="user-t">
         <img src="../assets/logo.png" alt="">
@@ -22,18 +21,11 @@
       <div style="width: 50%;"></div>
     </div>
     <router-view></router-view>
-    <Bottom></Bottom>
   </div>
 </template>
 
 <script>
-  import Top from '../components/Top.vue'
-  import Bottom from '../components/Bottom.vue'
   export default {
-    components: {
-      Top,
-      Bottom
-    },
     data() {
       return {
         show: 0,

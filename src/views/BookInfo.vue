@@ -1,6 +1,5 @@
 <template>
   <div class="book-info">
-    <Top></Top>
     <div class="main center">
       <div class="mian-t">
         <div class="book">
@@ -81,19 +80,12 @@
       </el-input>
       <el-button @click="release" style="margin-top: 12px;margin-left: 50%;transform: translateX(-50%);" type="primary">发表评论</el-button>
     </el-dialog>
-    <Bottom></Bottom>
   </div>
 </template>
 
 <script>
-  import Top from '../components/Top.vue'
-  import Bottom from '../components/Bottom.vue'
   export default {
     props: ['keyword', "id"],
-    components: {
-      Top,
-      Bottom
-    },
     data() {
       return {
         books: [],
