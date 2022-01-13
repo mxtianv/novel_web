@@ -19,7 +19,7 @@
               <div class="left">
                 <el-carousel :interval="5000" arrow="always">
                    <el-carousel-item v-for="(item, index) in swiper" :key="index">
-                     <router-link to="/chapter/1">
+                     <router-link :to="`/bookinfo/${item.link}`">
                        <img :src="item.img" alt="">
                      </router-link>
                    </el-carousel-item>
@@ -55,10 +55,10 @@
             </div>
             <div class="con">
               <div class="left">
-                <router-link to="/">
+                <router-link to="/bookinfo/5e73323a68df50bedf94d56a">
                   <img src="../assets/plate-2-best.jpg" alt="">
                 </router-link>
-                <router-link style="margin-top: 10px;display: block;font-size: 18px;" to="/">为啥他们都崇拜我</router-link>
+                <router-link style="margin-top: 10px;display: block;font-size: 18px;" to="/bookinfo/5e73323a68df50bedf94d56a">为啥他们都崇拜我</router-link>
                 <p>
                   作者：<router-link style="color: #666;font-size: 14px;" to="/">冻水洗脉</router-link>
                 </p>
@@ -131,10 +131,10 @@
           <div style="width: 100%" class="best-station">
             <div class="con">
               <div style="width: 25%;" class="left">
-                <router-link to="/">
+                <router-link to="/bookinfo/5e73323a68df50bedf94d56a">
                   <img src="../assets/plate-2-best.jpg" alt="">
                 </router-link>
-                <router-link style="margin-top: 10px;display: block;font-size: 18px;" to="/">为啥他们都崇拜我</router-link>
+                <router-link style="margin-top: 10px;display: block;font-size: 18px;" to="/bookinfo/5e73323a68df50bedf94d56a">为啥他们都崇拜我</router-link>
                 <p>
                   作者：<router-link style="color: #666;font-size: 14px;" to="/">冻水洗脉</router-link>
                 </p>
@@ -231,7 +231,7 @@
             info: "我只是有个扶弟魔姐姐，可为啥他们都以为我是个狠人？",
             author: "作者：冻水洗脉",
             img: require('../assets/plate-2-best.jpg'),
-            link: "/",
+            link: "/bookinfo/5e73323a68df50bedf94d56a",
             authorLink: "/"
           },
           {
@@ -239,7 +239,7 @@
             info: "我只是有个扶弟魔姐姐，可为啥他们都以为我是个狠人？",
             author: "作者：冻水洗脉",
             img: require('../assets/plate-2-best.jpg'),
-            link: "/",
+            link: "/bookinfo/5e73323a68df50bedf94d56a",
             authorLink: "/"
           },
           {
@@ -247,7 +247,7 @@
             info: "我只是有个扶弟魔姐姐，可为啥他们都以为我是个狠人？",
             author: "作者：冻水洗脉",
             img: require('../assets/plate-2-best.jpg'),
-            link: "/",
+            link: "/bookinfo/5e73323a68df50bedf94d56a",
             authorLink: "/"
           }
         ],
@@ -362,7 +362,7 @@
     methods: {
       verifyCaptcha() {
         this.axios.get("/api/verifyCaptcha").then(res => {
-          console.log(res.data)
+          // console.log(res.data)
         })
       },
       getCaptcha() {
@@ -375,6 +375,7 @@
 			this.getCaptcha();
       this.axios.get("/api/book/by-categories?gender=male&type=hot&major=奇幻&minor=&start=0&limit=3").then(res => {
         this.p2Books = res.data.books;
+        this.p2Books.length = 3;
         //console.log(this.p2Books)
       })
       this.axios.get("/api/book/by-categories?gender=male&type=hot&major=玄幻&minor=&start=0&limit=20").then(res => {
@@ -385,7 +386,7 @@
       })
       this.axios.get("/api/recommendPage/node/spread/575f74f27a4a60dc78a435a3?pl=ios").then(res => {
         this.swiper = res.data.data;
-        console.log(this.swiper)
+        // console.log(this.swiper)
       })
       this.axios.get("/api/ranking/54d43437d47d13ff21cad58b").then(res => {
         this.bangBooks = res.data.ranking.books;
@@ -431,6 +432,7 @@
     background-color: #d3dce6;
   }
   .p-top img {
+    height: 90px;
     width: 100%;
   }
   .title {

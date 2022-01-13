@@ -11,10 +11,10 @@
       <div class="nav">
         <ul>
           <router-link to="/user/index">
-            <li @click="setWat(0)" :class="{'new': show == 0}">我的书架</li>
+            <li @click="setWat(0)">我的书架</li>
           </router-link>
           <router-link to="/user/info">
-            <li @click="setWat(3)" :class="{'new': show == 1}">个人资料</li>
+            <li @click="setWat(3)">个人资料</li>
           </router-link>
         </ul>
       </div>
@@ -36,33 +36,14 @@
       setWat(id) {
         this.wat = id;
       }
-    },
-    mounted() {
-      let url = window.document.location.href;
-      url = url.split('/');
-      //console.log(url)
-      if (url[5] == 'index') {
-        this.show = 0;
-      } else if (url[5] == 'info') {
-        this.show = 1;
-      }
-    },
-    watch: {
-      wat(val) {
-        let url = window.document.location.href;
-        url = url.split('/');
-        if (url[5] == 'index') {
-          this.show = 1;
-        } else if (url[5] == 'info') {
-          this.show = 0;
-        }
-        //console.log(this.show)
-      }
     }
   }
 </script>
 
 <style scoped="scoped">
+  .router-link-exact-active li {
+    background: #f60 !important;
+  }
   .user-nav {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -91,7 +72,7 @@
     width: 35px;
     height: 16px;
     border-radius: 0;
-    vertical-align: middle;
+    vertical-align: sub;
   }
   .user-nav .nav ul {
     height: 100%;

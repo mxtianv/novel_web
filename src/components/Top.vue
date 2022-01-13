@@ -17,7 +17,7 @@
         <!-- 已登录 -->
         <div class="user" v-if="isLogin == true">
           <img src="../assets/logo.png" alt="">
-          {{user}}
+          {{ user }}
           <img src="../assets/vip.png" alt="">
           <router-link to="/user/index">
             <el-button style="margin-left: 10px;" size="mini" type="primary">个人中心</el-button>
@@ -30,7 +30,7 @@
       <div class="center">
         <ul>
           <router-link to="/">
-            <li :class="{'new': show == 1}">首页</li>
+            <li>首页</li>
           </router-link>
           <li>排行榜</li>
           <li>分类</li>
@@ -223,6 +223,11 @@
 </script>
 
 <style scoped="scoped">
+  .router-link-exact-active {
+    border-radius: 5px;
+    background: #666;
+    font-weight: 600;
+  }
   .center {
     display: flex;
     justify-content: space-between;

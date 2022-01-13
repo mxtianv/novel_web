@@ -2,7 +2,7 @@
   <div class="user-index center">
     <ul>
       <li>
-        <router-link to="/book/5ec24e70f4fdb48b0ac42bd1">
+        <router-link to="/book/5e73323a68df50bedf94d56a">
           <img src="../assets/plate-2-best.jpg" alt="">
         </router-link>
         <p>为啥他们都崇拜我</p>

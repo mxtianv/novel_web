@@ -21,9 +21,6 @@
     padding: 0;
     box-sizing: border-box;
   }
-  #app {
-    min-width: 1350px;
-  }
   a {
     text-decoration: none;
     color: #000000;
@@ -34,7 +31,9 @@
   }
   .center {
     width: 70%;
-    margin: auto;
+    min-width: 1000px;
+    max-width: 1650px;
+    margin: 0 auto;
   }
   .clearfix::before,
   .clearfix::after {
