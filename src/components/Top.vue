@@ -19,7 +19,7 @@
           <img src="../assets/logo.png" alt="">
           {{ user }}
           <img src="../assets/vip.png" alt="">
-          <router-link to="/user/index">
+          <router-link style="background: initial;" to="/user/index">
             <el-button style="margin-left: 10px;" size="mini" type="primary">个人中心</el-button>
           </router-link>
            <el-button @click="logout" style="margin-left: 15px;" size="mini" type="danger">退出</el-button>
